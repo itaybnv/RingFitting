@@ -4,10 +4,10 @@ app=[];
 app.x0_image=66; %enter manually - initial guess for the x coordinate of the center in ImageJ [pixels]
 app.y0_image=59; %enter manually - initial guess for the y coordinate of the center in ImageJ [pixels]
 app.cent_area=5; %enter manually - distance around the initial guess at which the center will be searched.
-app.radmin=8; %enter manually - minimal possible radius in [pixels]
+app.radmin=7; %enter manually - minimal possible radius in [pixels]
 app.radmax=12; %enter manually - maximal possible radius in [pixels]
 app.pixel_value_nm=65; %enter manually - camera pixel size in [nanometers]
-pic_name=sprintf('D:\\Anindita\\MatLab\\CircleFittingApp\\Example movies\\Time-Lapse-FtsZ.tif'); %enter manually - the full adreess of the movie
+pic_name=sprintf('C:\\Projects\\RingFitting\\Example movies\\Time-Lapse-FtsZ.tif'); %enter manually - the full adreess of the movie
 
 
 

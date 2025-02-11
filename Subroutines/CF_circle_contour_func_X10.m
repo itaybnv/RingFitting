@@ -54,12 +54,11 @@ for rad=rad_course*10-5:rad_course*10+5
             count=0;
             for ix=x02*10-9-round(rad*factor):x02*10-9+round(rad*factor)
                  for iy=y02*10-9-round(rad*factor):y02*10-9+round(rad*factor)
-                    if(round(sqrt((ix-centx)^2+(iy-centy)^2))==rad)
-                         int_mat(iy,ix) = I_fluorI(iy,ix);
-                         int=int+I_fluorI(iy,ix);
-                         count=count+1;
-                        
-                    end
+                    % Find the area of intersection
+                    int_mat(iy,ix) = I_fluorI(iy,ix);
+                    area = CF_circle_square_intersection_area_2(centx, centy, rad, ix, iy, 1, 1, 100) / 0.5;
+                    int = int + I_fluorI(iy,ix) * area;
+                    count = count + area;
                  end
             end
 

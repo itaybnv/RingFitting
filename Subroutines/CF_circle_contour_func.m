@@ -18,7 +18,6 @@ function Coordinates=circle_contour_func(i,radmin,radmax,cent_area)
 
 I_fluor=i;        
 I_fluor=double(I_fluor);
-I_fluor1=I_fluor;
 [R,C]=size(I_fluor);
 
 
@@ -26,7 +25,7 @@ I_fluor1=I_fluor;
 centx= (R+1)/2; centy = (C+1)/2;
 
 
-%% Scan over all the circles and find the best %
+%% Scan over all the circles and find the best %%
 
 intensity1x_central=nan(numel(-(cent_area-1)/2:(cent_area-1)/2),numel(-(cent_area-1)/2:(cent_area-1)/2),numel(radmin:radmax));
 Count1x_central=nan(size(intensity1x_central));
@@ -46,11 +45,10 @@ for rad=radmin:radmax
             count=0;
             for ix=1:C
                  for iy=1:R
-                    if(round(sqrt((ix-cenx)^2+(iy-ceny)^2))==rad)
-                         int=int+I_fluor(iy,ix);
-                         count=count+1;
-                         I_fluor1(iy,ix)=0;
-                    end
+                    % Find the area of intersection
+                    area = CF_circle_square_intersection_area_2(cenx, ceny, rad, ix, iy, 1, 1, 20) / 0.5;
+                    int = int + I_fluor(iy,ix) * area;
+                    count = count + area;
                  end
             end
             intensity((cent_area-1)/2+indy+1,(cent_area-1)/2+indx+1,rad)=int/count; %calculates the average intensity along the circumference of each circle
