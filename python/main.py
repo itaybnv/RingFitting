@@ -66,7 +66,6 @@ class CircleFitter:
         # Convert to global coordinates
         global_x = center_x + crop_bounds[2]
         global_y = center_y + crop_bounds[0]
-        print(global_x, global_y)
         self.initial_x, self.initial_y = global_x, global_y
 
         # 10x Precision Fit (With 2D Interpolation)
@@ -166,7 +165,6 @@ class CircleFitter:
             best_radius / interpolation_factor
         )
 
-
     def compute_intensity(self, image, x_center, y_center, radius):
         """ Computes intensity using the selected method: 'standard' or 'weight_matrix'. """
         if self.method == "standard":
@@ -203,23 +201,33 @@ class CircleFitter:
 
 if __name__ == "__main__":
     # Small test case
-    test_image_path = "python/my_example.tif"
+    my_example_image_path = "python/my_example.tif"
+    example_image_path = "python/example.tif"
     test_weight_matrix_path = "weight_matrices.npz"
 
-    parameters = {"image_path": test_image_path, 
-                  "weight_matrix_path": test_weight_matrix_path, 
-                  "initial_x": 50, "initial_y": 47,
-                 "search_area": 5, 
-                 "min_radius": 2, "max_radius": 10, 
-                 "pixel_size_nm": 65}
+    my_example_parameters = {"image_path": my_example_image_path, 
+                             "weight_matrix_path": test_weight_matrix_path, 
+                             "initial_x": 50, "initial_y": 47,
+                             "search_area": 5, 
+                             "min_radius": 2, "max_radius": 10, 
+                             "pixel_size_nm": 65}
+    
+    example_parameters = {"image_path": example_image_path, 
+                          "weight_matrix_path": test_weight_matrix_path, 
+                          "initial_x": 65, "initial_y": 59,
+                          "search_area": 5, 
+                          "min_radius": 9, "max_radius": 13, 
+                          "pixel_size_nm": 65}
 
+    
     print("Running CircleFitter in standard mode...")
-    fitter_standard = CircleFitter(**parameters, method="standard")
-    fitter_standard.fit_frame(0)
+    fitter_standard = CircleFitter(**example_parameters, method="standard")
+    # fitter_standard.fit_frame(0)
+    fitter_standard.process_all_frames()
 
     if test_weight_matrix_path:
         print("\nRunning CircleFitter in weight matrix mode...")
-        fitter_weight_matrix = CircleFitter(**parameters, method="weight_matrix")
+        fitter_weight_matrix = CircleFitter(**example_parameters, method="weight_matrix")
         fitter_weight_matrix.fit_frame(0)
 
     print("\n✅ Test case completed.")
