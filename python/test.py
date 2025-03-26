@@ -94,13 +94,13 @@ class CircleFitterTest:
 # Run the test
 if __name__ == "__main__":
     test = CircleFitterTest(
-        image_path="python/example.tif",
+        image_path="python/my_example.tif",
         weight_matrix_path="weight_matrices.npz",
-        initial_x=66,
-        initial_y=59,
+        initial_x=50,
+        initial_y=47,
         search_area=5,
-        min_radius=7,
-        max_radius=12,
+        min_radius=4,
+        max_radius=7,
         pixel_size_nm=65
     )
     test.run_test()
